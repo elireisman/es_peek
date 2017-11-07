@@ -1,24 +1,21 @@
-# README
+### EsPeek
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+#### Purpose
+This project is just a quick experiment to:
+* Learn me some Ruby-on-Rails
+* Learn about the Elasticsearch bindings for Ruby
+* Learn about the Elasticsearch bindings for Rails, ActiveRecord models etc.
 
-Things you may want to cover:
+#### Quick Start
 
-* Ruby version
+1. Install `docker` locally, make sure the Docker Daemon is running locally
+2. Run this: `bin/es24_rails_app_session`
 
-* System dependencies
+^ this starts an ES 2.4 server at `localhost:9200` in a Docker container on your laptop, and launches the rails app. CTRL-C'ing out will kill/clean up the app and the container
 
-* Configuration
 
-* Database creation
+#### TODOs
+* Add a bunch of endpoints to expose various ES cluster admin data via ES API calls
+* HTML pages to render the data in semi-pretty format (using Bootstrap+SASS currently but we'll see how that goes)
+* Make a _very_ simplified version of Head/Kopf/Cerebro etc. to play with this stack a bit
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
