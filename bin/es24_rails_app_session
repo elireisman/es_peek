@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+
+if [ -n "$(docker images|grep elasticsearch)"] ; then
+	echo 'Pulling Elasticsearch 2.4 Docker image...'
+	docker pull 'elasticsearch:2.4'
+fi
+
+echo 'Starting Elasticsearch 2.4 in Docker container -> localhost:9200'
+docker run --rm -d -p 9200:9200 -p 9300:9300 --name es24_local elasticsearch:2.4
+sleep 4
+
+echo 'Starting Rails app - use CTRL-C to kill app + ES container'
+rails s
+
+echo 'Killing ES container...'
+docker stop es24_local
+
+echo 'Run completed'
+
