@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 
-if [ -n "$(docker images|grep elasticsearch)"] ; then
+if [ -z "$(docker images|grep elasticsearch)" ] ; then
 	echo 'Pulling Elasticsearch 2.4 Docker image...'
 	docker pull 'elasticsearch:2.4'
 fi
