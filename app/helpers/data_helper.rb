@@ -3,6 +3,7 @@ require 'elasticsearch/model'
 module DataHelper
 	include Elasticsearch::Model
 
+
 	# _cat and _cluster endpoints
 
 	def help_health_data
@@ -29,10 +30,20 @@ module DataHelper
 		__elasticsearch__.client.cat.segments(:format => 'json')
 	end
 
+	def help_fielddata_data
+		__elasticsearch__.client.cat.fielddata(:format => 'json')
+	end
+
+	def help_recovery_data
+		__elasticsearch__.client.cat.recovery(:format => 'json')
+	end
+
+
 	### _nodes endpoints
 
 	def help_node_stats_group_data(group, name = nil)
-		__elasticsearch__.client.nodes.stats(:format => 'json')['nodes'].keys.map do |k|
+		results = __elasticsearch__.client.nodes.stats(:format => 'json')
+		results['nodes'].keys.map do |k|
 			node_name = results['nodes'][k]['name']
 			if !name || name == node_name
 				{ k => results['nodes'][k].select {|gk, gv| gv if group == gk} }

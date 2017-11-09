@@ -3,6 +3,7 @@ require 'elasticsearch/model'
 class DataController < ApiController
 	include DataHelper, Elasticsearch::Model
 
+
 	# _cat and _cluster endpoints
 
 	def health_data
@@ -35,12 +36,23 @@ class DataController < ApiController
 		render :json => @segments_data
 	end
 
+	def fielddata_data
+		@fielddata_data = help_fielddata_data
+		render :json => @fielddata_data
+	end
+
+	def recovery_data
+		@recovery_data = help_recovery_data
+		render :json => @recovery_data
+	end
+
+
 	### _nodes endpoints
 
 	def node_stats_group_data
 		render(:json => {error: true, msg: 'must provide the name of a valid node stats group'}) unless params[:group]
 
-		@node_stats_data = help_node_stats_group_data
+		@node_stats_data = help_node_stats_group_data(params[:group], params[:name])
 		render :json => @node_stats_data
 	end
 
@@ -53,7 +65,7 @@ class DataController < ApiController
         # list full dump of all node stats groups for all nodes, or for one named node
         # using human-readable name (one of those returned by node_names_data endpoint)
         def node_stats_data
-                @node_stats_data = help_node_stats_data
+                @node_stats_data = help_node_stats_data(params[:name])
                 render :json => @node_stats_data
         end
 

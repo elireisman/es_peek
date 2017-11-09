@@ -11,6 +11,8 @@ Rails.application.routes.draw do
                     get '/aliases', to: 'data#aliases_data'
                     get '/shards', to: 'data#shards_data'
                     get '/segments', to: 'data#segments_data'
+                    get '/fielddata', to: 'data#fielddata_data'
+                    get '/recovery', to: 'data#recovery_data'
                 end # /cat scope
 
                 scope :node do
